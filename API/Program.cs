@@ -13,6 +13,7 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors(); // cors policy
 
 var app = builder.Build();
 /* order matters with middleware */
@@ -23,6 +24,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// cors policy middleware
+app.UseCors(opt => 
+{
+    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+});
 app.UseAuthorization();
 
 app.MapControllers();
