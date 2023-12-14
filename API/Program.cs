@@ -1,4 +1,5 @@
 using API.Data;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +17,12 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 builder.Services.AddCors(); // cors policy
 
 var app = builder.Build();
+
 /* order matters with middleware */
 // Configure the HTTP request pipeline.
+
+app.UseMiddleware<ExceptionMiddleware>(); // use custom middleware from ExceptionMiddleware class
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
