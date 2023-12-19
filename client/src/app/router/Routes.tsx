@@ -4,7 +4,7 @@ import HomePage from "../../features/home/HomePage";
 import ProductDetails from "../../features/catalog/ProductDetails";
 import Catalog from "../../features/catalog/Catalog";
 import AboutPage from "../../features/about/AboutPage";
-import { ContactPage } from "@mui/icons-material";
+import ContactPage from "../../features/contact/ContactPage";
 import ServerError from "../errors/ServerError";
 import NotFound from "../errors/NotFound";
 import BasketPage from "../../features/basket/BasketPage";
