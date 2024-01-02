@@ -9,10 +9,15 @@ import {
 import { currencyFormat } from '../../app/util/util';
 import { useAppSelector } from '../../app/store/configureStore';
 
-const BasketSummary = () => {
+interface Props {
+  subtotal?: number;
+}
+
+const BasketSummary = ({subtotal} : Props) => {
     const {basket} = useAppSelector(state => state.basket);
     // if basket.items returns undefined, assign value of 0 to subtotal
-    const subtotal = basket?.items.reduce((sum, item) => sum + (item.quantity * item.price), 0) ?? 0; 
+    if(subtotal === undefined)
+      subtotal = basket?.items.reduce((sum, item) => sum + (item.quantity * item.price), 0) ?? 0; 
     const deliveryFee = subtotal > 10000 ? 0 : 1000;
 
   return (
