@@ -42,7 +42,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddDbContext<StoreContext>(opt => 
 {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddCors(); // cors policy
 builder.Services.AddIdentityCore<User>(opt => 
@@ -84,6 +84,9 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseDefaultFiles(); // look in wwwroot for index.html
+app.UseStaticFiles();
+
 // cors policy middleware
 app.UseCors(opt => 
 {
@@ -93,6 +96,7 @@ app.UseAuthentication(); // must authenticate before authorizing user
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapFallbackToController("Index", "Fallback");
 
 /* create database and seed data */
 var scope = app.Services.CreateScope();

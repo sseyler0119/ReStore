@@ -25,7 +25,7 @@ const AppPagination = ({metaData, onPageChange}: Props) => {
         size='large'
         count={totalPages}
         page={currentPage}
-        onChange={(e, page) => onPageChange(page)}
+        onChange={(_, page) => onPageChange(page)}
       />
     </Box>
   );
